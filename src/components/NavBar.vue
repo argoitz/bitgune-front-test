@@ -21,17 +21,22 @@
                     <li v-if="!token" class="nav-item">
                         <router-link class="nav-link" to="/login">Login</router-link>
                     </li>
+                    <li v-if="!token" class="nav-item">
+                        <router-link class="nav-link" to="/register">Register</router-link>
+                    </li>
 
                     <li v-if="token" class="nav-item">
-                        <button @click="logout">Cerrar Sesion</button>
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
+                            <button class="btn btn-light rounded-circle dropdown-toggle p-2" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"  data-bs-display="static" aria-expanded="false">
+                                <font-awesome-icon :icon="['fas', 'user']" />
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+                                <li>
+                                    <a  @click="logout" class="dropdown-item" href="#">
+                                        <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
+                                        Log out
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>
