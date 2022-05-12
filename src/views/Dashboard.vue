@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
-    <h1>Ruta protegida</h1>
-  </div>
+  <main class="bg-light container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center py-5">
+    <h1 class="text-dark">Protected Route</h1>
+  </main>
 </template>
 
 <script>

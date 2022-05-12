@@ -36,7 +36,7 @@ export default createStore({
         localStorage.setItem("token2", userDB.data.token);
 
         //Redirect to home
-        router.push("/");
+        router.push("/dashboard");
       } catch (error) {
         console.log("error: ", error);
       }
@@ -74,6 +74,7 @@ export default createStore({
     logout({ commit }) {
       commit("setToken", null);
       localStorage.removeItem("token2");
+      router.push("/");
     },
   },
 });

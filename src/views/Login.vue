@@ -3,10 +3,8 @@
 
         <div class="col-lg-4 col-xl-3 p-5 bg-light text-dark rounded shadow">
             <h2 class="mb-5 text-center">
-                <!-- <img class="img-thumbnail rounded-circle"  src="../assets/argo_logo_md.png" alt="" width="40"> -->
                 Member Login
             </h2>
-            <!-- <img width="80" class="img-thumbnail mb-4" src="../assets/argo_logo_md.png" /> -->
             <form @submit.prevent="login(usuario)">
                 <div class="mb-4">
                     <label for="emailInput" class="form-label">Email address</label>

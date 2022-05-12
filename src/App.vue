@@ -1,14 +1,18 @@
 <template>
   <NavBar/>
-    <router-view/>
+  <router-view/>
+  <Footer/>
 </template>
 
 <script>
 import {mapActions, mapState} from 'vuex'
 import NavBar from '@/components/NavBar.vue';
+import Footer from '@/components/Footer.vue';
+
 export default {
   components: {
-    NavBar
+    NavBar,
+    Footer
   },
   computed: {
     ...mapState(['token'])

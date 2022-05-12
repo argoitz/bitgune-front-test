@@ -33,7 +33,6 @@
             <p>Now log in with your new accoun here:</p>
             <router-link class="btn btn-success btn-lg" to="/login">
                 Login page
-                <!-- <font-awesome-icon :icon="['fas', 'right-to-bracket']" /> -->
             </router-link>
 
         </div>
