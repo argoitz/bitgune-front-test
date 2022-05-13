@@ -1,4 +1,4 @@
-# Vue-simple-JWT-auth
+# Bitgune technical test - Frontend
 
 ## Description
 
