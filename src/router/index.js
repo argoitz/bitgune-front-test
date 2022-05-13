@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
-import Dashboard from "../views/Dashboard.vue";
+import RequestForm from "../views/RequestForm.vue";
+import ManageForm from "../views/ManageForm.vue";
 
 import store from "../store";
 
@@ -25,9 +26,15 @@ const routes = [
     meta: { hideForAuth: true },
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
+    path: "/request-form",
+    name: "RequestForm",
+    component: RequestForm,
+    meta: { requireAuth: true },
+  },
+  {
+    path: "/manage-form",
+    name: "ManageForm",
+    component: ManageForm,
     meta: { requireAuth: true },
   },
 ];
@@ -45,7 +52,7 @@ router.beforeEach((to, from, next) => {
 
   //Check if token exist and current route is protected
   if (protectedRoute && store.state.token === null) {
-    router.push("/dashboard");
+    router.push("/request-form");
   }
   //Check if logued in and if current route is login or register for redirecting
   if (hideForAutPages && store.state.token !== null) {

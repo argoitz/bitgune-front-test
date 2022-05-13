@@ -41,7 +41,7 @@
 
 
 <script>
-import {mapActions, mapState} from 'vuex'
+import {mapActions, mapState, mapMutations} from 'vuex'
 export default {
   data() {
     return {
@@ -52,8 +52,12 @@ export default {
       }
     }
   },
+  created(){
+    this.resetErrors()
+  },
   methods: {
-    ...mapActions(['register'])
+    ...mapActions(['register', 'resetErrors']),
+    ...mapMutations(['resetErrors'])
   },
   computed: {
       ...mapState(['regError', 'successRegistered'])

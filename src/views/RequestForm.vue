@@ -115,7 +115,6 @@ export default {
   },
   methods: {
     async getFormData(){
-      console.log(this.token);
       try {
         const res = await fetch('http://localhost:3001/api/dashboard/request-form', {
           headers: {
@@ -154,7 +153,6 @@ export default {
       if (!this.formData.subtype) {
         const selected = this.types.find(t => t.name === this.formData.type);
         if(selected){
-          console.log(selected.subtypes.length);
           if(selected.subtypes.length)
             this.errors.push({field: 'subtype'});
         } 

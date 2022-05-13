@@ -5,6 +5,9 @@
             <h2 class="mb-5 text-center">
                 Member Login
             </h2>
+            <div v-if="loginError" class="alert alert-danger" role="alert">
+              {{loginError}}
+            </div>
             <form @submit.prevent="login(usuario)">
                 <div class="mb-4">
                     <label for="emailInput" class="form-label">Email address</label>
@@ -23,7 +26,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapState,mapActions, mapMutations} from 'vuex'
 export default {
   data() {
     return {
@@ -33,8 +36,16 @@ export default {
       }
     }
   },
+  
+  created(){
+    this.resetErrors()
+  },
   methods: {
-    ...mapActions(['login'])
+    ...mapActions(['login']),
+    ...mapMutations(['resetErrors'])
+  },
+  computed: {
+    ...mapState(['loginError'])
   }
 }
 </script>

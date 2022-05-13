@@ -13,8 +13,16 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/">Home</router-link>
                     </li>
-                    <li  v-if="token" class="nav-item">
-                        <router-link class="nav-link" to="/dashboard">Dashboard</router-link>
+
+                    <li v-if="token" class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <router-link class="dropdown-item" to="/request-form">Request form</router-link>
+                            <li  v-if="token && userRole=='admin'"><hr class="dropdown-divider"></li>
+                            <router-link  v-if="token && userRole=='admin'" class="dropdown-item" to="/manage-form">Manage Forms</router-link>
+                        </ul>
                     </li>
                     <li v-if="!token" class="nav-item">
                         <router-link class="nav-link" to="/login">Login</router-link>
@@ -49,14 +57,15 @@
 import {mapActions, mapState} from 'vuex'
 export default {
   computed: {
-    ...mapState(['token'])
+    ...mapState(['token', 'userRole'])
   },
   methods:{
-    ...mapActions(['getToken', 'logout'])
+    ...mapActions(['getToken', 'getRole', 'logout'])
   },
   created(){
     //On page reload, if user logued in, set token
-    this.getToken()
+    this.getToken(),
+    this.getRole()
   }
 }
 

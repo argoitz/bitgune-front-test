@@ -6,16 +6,41 @@ export default createStore({
     token: null,
     regError: null,
     successRegistered: null,
+    loginError: null,
+    userRole: null,
+    formData: {
+      name: "test",
+      surname: "Test test",
+      email: "test@test.com",
+      phone: 666555444,
+      birth: "1987-11-15",
+      sex: "male",
+      type: null,
+      subtype: null,
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
+      terms: null,
+    },
   },
   mutations: {
     setToken(state, payload) {
       state.token = payload;
+    },
+    setRole(state, payload) {
+      state.userRole = payload;
     },
     setErrorMessage(state, payload) {
       state.regError = payload;
     },
     setSuccessRegistered(state, payload) {
       state.successRegistered = payload;
+    },
+    setLoginError(state, payload) {
+      state.loginError = payload;
+    },
+    resetErrors(state) {
+      state.loginError = null;
+      state.regError = null;
     },
   },
   actions: {
@@ -32,11 +57,21 @@ export default createStore({
         //Return in json format
         const userDB = await res.json();
 
-        commit("setToken", userDB.data.token);
-        localStorage.setItem("token2", userDB.data.token);
+        //Check if server return any error message
+        if (userDB.error) {
+          commit("setLoginError", userDB.error);
+        } else {
+          commit("setLoginError", null);
+          commit("setToken", userDB.data.token);
+          localStorage.setItem("token2", userDB.data.token);
 
-        //Redirect to home
-        router.push("/dashboard");
+          //SetUSerRole
+          commit("setRole", userDB.data.userRole);
+          localStorage.setItem("role2", userDB.data.userRole);
+
+          //Redirect to home
+          router.push("/request-form");
+        }
       } catch (error) {
         console.log("error: ", error);
       }
@@ -46,6 +81,13 @@ export default createStore({
         commit("setToken", localStorage.getItem("token2"));
       } else {
         commit("setToken", null);
+      }
+    },
+    getRole({ commit }) {
+      if (localStorage.getItem("role2")) {
+        commit("setRole", localStorage.getItem("role2"));
+      } else {
+        commit("setRole", null);
       }
     },
     async register({ commit }, user) {
@@ -75,6 +117,9 @@ export default createStore({
       commit("setToken", null);
       localStorage.removeItem("token2");
       router.push("/");
+    },
+    isAdminUser() {
+      if (localStorage.getItem("role2") != "admin") router.push("/");
     },
   },
 });
