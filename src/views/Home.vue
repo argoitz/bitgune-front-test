@@ -2,7 +2,7 @@
   <main class="bg-primary container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center  text-white py-5">
 
         <img width="80" class="img-thumbnail" src="../assets/argo_logo_md.png" />
-        <h1 class="mb-2 mt-2">Wellcome to Auth Demo</h1>
+        <h1 class="mb-2 mt-2">Welcome to my project</h1>
         <h5 class="mb-5">You can start registering as a new user</h5>
         
         <router-link class="btn btn-outline-light btn-lg" to="/register">
