@@ -35,10 +35,7 @@
             <td>{{form.message}}</td>
             <td>{{form.date}}</td>
             <td class="row border-0">
-              <button type="button" class="btn btn-primary btn-sm m-1 col">
-                <font-awesome-icon :icon="['fas', 'pen']" />
-              </button>
-              <button type="button" class="btn btn-danger btn-sm m-1 col">
+              <button type="button" class="btn btn-danger btn-sm m-1 col"  v-on:click="this.indexToRemove = index"  data-bs-toggle="modal" data-bs-target="#removeFormModal">
                 <font-awesome-icon :icon="['fas', 'trash']" />
               </button>
             </td>
@@ -48,6 +45,25 @@
       </table>
     </div>
     
+
+    <div class="modal fade" id="removeFormModal" tabindex="-1" aria-labelledby="removeFormModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="removeFormModalLabel">Remove Form</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete this form?<br>
+            If you delete this form you will not be able to recover it.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" v-on:click="removeForm()" data-bs-dismiss="modal"  >Remove</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -57,6 +73,7 @@ export default {
   data(){
     return {
       forms: null,
+      indexToRemove: null
     }
   },
   created(){
@@ -87,8 +104,20 @@ export default {
         console.log(error)
       }
     },
-
-
+    async removeForm(){
+      const res = await fetch(
+        "http://localhost:3001/api/dashboard/forms/"+this.forms[this.indexToRemove]._id,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token": this.token,
+          },
+        }
+      );
+      const response = await res.json();
+      this.getFormData();
+    }
   }
 }
 </script>

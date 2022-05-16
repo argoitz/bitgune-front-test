@@ -8,19 +8,6 @@ export default createStore({
     successRegistered: null,
     loginError: null,
     userRole: null,
-    formData: {
-      name: "test",
-      surname: "Test test",
-      email: "test@test.com",
-      phone: 666555444,
-      birth: "1987-11-15",
-      sex: "male",
-      type: null,
-      subtype: null,
-      message:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation",
-      terms: null,
-    },
   },
   mutations: {
     setToken(state, payload) {
